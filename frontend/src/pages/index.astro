@@ -1,0 +1,26 @@
+---
+let camionetas = [];
+
+// Obtener las camionetas en el servidor
+async function fetchCamionetas() {
+  try {
+    const response = await fetch('http://localhost:5000/api/camionetas');
+    if (!response.ok) {
+      throw new Error('Error al obtener las camionetas');
+    }
+    camionetas = await response.json();
+  } catch (error) {
+    console.error(error);
+    camionetas = [];
+  }
+}
+
+// Llamamos a la función para obtener las camionetas
+await fetchCamionetas();
+---
+
+<h1>Camionetas Disponibles</h1>
+
+<ul>
+  {camionetas.length === 0 ? (
+    <p>No hay camionetas disponibles
